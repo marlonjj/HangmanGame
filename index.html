@@ -11,6 +11,7 @@
     <h1>Hangman Game: States Edition</h1> <br>
     <div id=game-box></div> <br>
     <div id=guess-box></div> <br>
+    Lives = <span id=lifeCount></span> <br>
     Wins  =  <span id=wins></span> <br> <br>
     <button onclick = "gameStart()">New Game</button>
 
@@ -23,6 +24,7 @@
     var answerKey;
     function gameStart(){    
         var lives = 3;
+        $("#lifeCount").html(lives);
         answer = [];
         $("#guess-box").empty();
         $("#game-box").empty();
@@ -33,8 +35,35 @@
            $("#game-box").append(answer[i] + " ");        
         }
     document.onkeyup = function(event){
+        var correctGuess = false;
+        for(n = 0; n<answerKey.length; n++){ //search answerKey to see if guess was correct
+            if(event.key == answerKey[n]){
+                correctGuess = true;  //guess is correct conditions
+                answer[n] = answerKey[n];   //reveal letters 
+                $("#game-box").empty();      
+                for(m=0; m<answer.length; m++){            
+                    $("#game-box").append(answer[m] + " ");        
+                }
+            }
+        }
+        if (correctGuess == false){
+            $("#guess-box").append(event.key + " "); //incorrect guess then lose a life
+            lives--;
+            $("#lifeCount").html(lives);
+            if (lives == 0){ //trigger lose conditions
+                alert("Game over");
+                alert("Correct answer was: " + answerKey);
+                gameStart();
+            }
+        } 
 
-        if (event.keyCode == 38){ //Easter egg: Konami Code
+        if (answerKey == answer.join('')){ //answer correct then game win conditions
+        winCount++;
+        $("#wins").html(winCount);
+        alert("Good Job!");
+            }
+
+       /* if (event.keyCode == 38){ //Easter egg: Konami Code
             console.log("Up pressed");
             document.onkeyup = function(event){               
                 if (event.keyCode == 38){ console.log("Up pressed");
@@ -56,35 +85,8 @@
                 if (event.key == 'a'){
                     alert("What a cheater. Ah well, here's some extra lives");
                     lives = 1337;
-                }}}}}}}}}}}}}}}}}}} //End of Easter Egg Beginning of Homework Code
-
-
-        var correctGuess = false;
-        for(n = 0; n<answerKey.length; n++){ //search answerKey to see if guess was correct
-            if(event.key == answerKey[n]){
-                correctGuess = true;  //guess is correct conditions
-                answer[n] = answerKey[n];   //reveal letters 
-                $("#game-box").empty();      
-                for(m=0; m<answer.length; m++){            
-                    $("#game-box").append(answer[m] + " ");        
-                }
-            }
-        }
-        if (correctGuess == false){
-            $("#guess-box").append(event.key + " "); //incorrect guess then lose a life
-            lives--;
-            if (lives == 0){ //trigger lose conditions
-                alert("Game over");
-                alert("Correct answer was: " + answerKey);
-                gameStart();
-            }
-        } 
-
-        if (answerKey == answer.join('')){ //answer correct then game win conditions
-        winCount++;
-        $("#wins").html(winCount);
-        alert("Good Job!");
-            }
+                    $("#lifeCount").html(lives);
+                }}}}}}}}}}}}}}}}}}} //End of Easter Egg Beginning of Homework Code */
         }        
     }
     </script>
