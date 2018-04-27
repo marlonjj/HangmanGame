@@ -13,7 +13,7 @@
     <div id=guess-box></div> <br>
     Lives = <span id=lifeCount></span> <br>
     Wins  =  <span id=wins></span> <br> <br>
-    <button onclick = "gameStart()">New Game</button>
+    <button onclick = "gameStart(3)">New Game</button>
 
     <script>
 
@@ -22,8 +22,8 @@
     var winCount = 0;
     var answerBank = ["california", "texas", "florida", "illinois", "pennsylvania", "ohio", "michigan", "georgia", "virginia", "washington", "massachusetts", "indiana", "arizona", "tennessee", "missouri", "maryland"];
     var answerKey;
-    function gameStart(){    
-        var lives = 3;
+    function gameStart(lives){    
+        var lives;
         $("#lifeCount").html(lives);
         answer = [];
         $("#guess-box").empty();
@@ -53,7 +53,7 @@
             if (lives == 0){ //trigger lose conditions
                 alert("Game over");
                 alert("Correct answer was: " + answerKey);
-                gameStart();
+                gameStart(3);
             }
         } 
 
@@ -63,7 +63,7 @@
         alert("Good Job!");
             }
 
-       /* if (event.keyCode == 38){ //Easter egg: Konami Code
+        if (event.keyCode == 38){ //Easter egg: Konami Code
             console.log("Up pressed");
             document.onkeyup = function(event){               
                 if (event.keyCode == 38){ console.log("Up pressed");
@@ -83,11 +83,10 @@
                 if (event.key == 'b'){console.log("B pressed");
             document.onkeyup = function(event){                
                 if (event.key == 'a'){
-                    alert("What a cheater. Ah well, here's some extra lives");
-                    lives = 1337;
-                    $("#lifeCount").html(lives);
-                }}}}}}}}}}}}}}}}}}} //End of Easter Egg Beginning of Homework Code */
-        }        
+                    alert("What a cheater. Ah well, here's some extra lives for next game");
+                    gameStart(1337);
+                }}}}}}}}}}}}}}}}}}} //End of Easter Egg Beginning of Homework Code 
+        console.log("End of game");}        
     }
     </script>
 </body>
