@@ -33,6 +33,7 @@
            $("#game-box").append(answer[i] + " ");        
         }
     document.onkeyup = function(event){
+
         if (event.keyCode == 38){ //Easter egg: Konami Code
             console.log("Up pressed");
             document.onkeyup = function(event){               
@@ -54,7 +55,9 @@
             document.onkeyup = function(event){                
                 if (event.key == 'a'){
                     alert("Stop Cheating");
-                }}}}}}}}}}}}}}}}}}} 
+                }}}}}}}}}}}}}}}}}}} //End of Easter Egg Beginning of Homework Code
+
+
         var correctGuess = false;
         for(n = 0; n<answerKey.length; n++){ //search answerKey to see if guess was correct
             if(event.key == answerKey[n]){
