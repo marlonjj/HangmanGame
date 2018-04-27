@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Hangman Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body style="text-align: center; background-color: darkred; color: white;">
+    <h1>Hangman Game: States Edition</h1> <br>
+    <div id=game-box></div> <br>
+    <div id=guess-box></div> <br>
+    Wins  =  <span id=wins></span> <br> <br>
+    <button onclick = "gameStart()">New Game</button>
+
+    <script>
+
+    var guessed = [];
+    var answer = [];
+    var winCount = 0;
+    var answerBank = ["california", "texas", "florida", "illinois", "pennsylvania", "ohio", "michigan", "georgia", "virginia", "washington", "massachusetts", "indiana", "arizona", "tennessee", "missouri", "maryland"];
+    var answerKey;
+    function gameStart(){    
+        var lives = 3;
+        answer = [];
+        $("#guess-box").empty();
+        $("#game-box").empty();
+        $("#wins").html(winCount);
+        answerKey = answerBank[Math.floor(Math.random() *answerBank.length)]; //random choice of answer from answerBank array
+        for(i=0; i<answerKey.length; i++){            //create an array with underscores in place of correct letters
+           answer[i] = "_";
+           $("#game-box").append(answer[i] + " ");        
+        }
+    document.onkeyup = function(event){ 
+        var correctGuess = false;
+        for(n = 0; n<answerKey.length; n++){ //search answerKey to see if guess was correct
+            if(event.key == answerKey[n]){
+                correctGuess = true;  //guess is correct conditions
+                answer[n] = answerKey[n];   //reveal letters 
+                $("#game-box").empty();      
+                for(m=0; m<answer.length; m++){            
+                    $("#game-box").append(answer[m] + " ");        
+                }
+            }
+        }
+        if (correctGuess == false){
+            $("#guess-box").append(event.key); //incorrect guess then lose a life
+            lives--;
+            if (lives == 0){ //trigger lose conditions
+                alert("Game over");
+                alert("Correct answer was: " + answerKey);
+                gameStart();
+            }
+        } 
+
+        if (answerKey == answer.join('')){ //answer correct then game win conditions
+        winCount++;
+        $("#wins").html(winCount);
+        alert("Good Job!");
+            }
+        }
+    }
+
+    </script>
+</body>
+</html>
