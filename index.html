@@ -32,7 +32,29 @@
            answer[i] = "_";
            $("#game-box").append(answer[i] + " ");        
         }
-    document.onkeyup = function(event){ 
+    document.onkeyup = function(event){
+        if (event.keyCode == 38){ //Easter egg: Konami Code
+            console.log("Up pressed");
+            document.onkeyup = function(event){               
+                if (event.keyCode == 38){ console.log("Up pressed");
+            document.onkeyup = function(event){                
+                if (event.keyCode == 40){console.log("Down pressed");
+            document.onkeyup = function(event){                
+                if (event.keyCode == 40){console.log("Down pressed");
+            document.onkeyup = function(event){                
+                if (event.keyCode == 37){console.log("Left pressed");
+            document.onkeyup = function(event){                
+                if (event.keyCode == 39){console.log("Right pressed");
+            document.onkeyup = function(event){                
+                if (event.keyCode == 37){console.log("Left pressed");
+            document.onkeyup = function(event){                
+                if (event.keyCode == 39){console.log("Right pressed");
+            document.onkeyup = function(event){                
+                if (event.key == 'b'){console.log("B pressed");
+            document.onkeyup = function(event){                
+                if (event.key == 'a'){
+                    alert("Stop Cheating");
+                }}}}}}}}}}}}}}}}}}} 
         var correctGuess = false;
         for(n = 0; n<answerKey.length; n++){ //search answerKey to see if guess was correct
             if(event.key == answerKey[n]){
@@ -45,7 +67,7 @@
             }
         }
         if (correctGuess == false){
-            $("#guess-box").append(event.key); //incorrect guess then lose a life
+            $("#guess-box").append(event.key + " "); //incorrect guess then lose a life
             lives--;
             if (lives == 0){ //trigger lose conditions
                 alert("Game over");
@@ -59,9 +81,8 @@
         $("#wins").html(winCount);
         alert("Good Job!");
             }
-        }
+        }        
     }
-
     </script>
 </body>
 </html>
